@@ -1,0 +1,5 @@
+schema: spec-driven
+name: cards-counter
+description: Отображение счётчика карточек рядом с названием доски
+createdAt: 2026-10-08T20:51:00+03:00
+updatedAt: 2026-10-08T20:51:00+03:00
