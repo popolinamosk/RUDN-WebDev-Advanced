@@ -1,0 +1,5 @@
+schema: spec-driven
+name: delete-card
+description: Удаление карточки с доски через кнопку-крестик
+createdAt: 2026-10-09T13:18:00+03:00
+updatedAt: 2026-10-09T13:18:00+03:00
