@@ -1,14 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
-    // Запросы к /api/* уходят на мок-сервер (npm run server)
     proxy: {
       "/api": {
-        target: "http://localhost:3001",
+        target: "http://localhost:3000", // <-- ИЗМЕНЕНО С 3001 НА 3000
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
