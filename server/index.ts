@@ -14,6 +14,7 @@ const cards: Card[] = [
 ];
 
 const app = express();
+
 app.use(express.json());
 
 app.get("/cards", (req, res) => {
@@ -22,26 +23,53 @@ app.get("/cards", (req, res) => {
 
 app.post("/cards", (req, res) => {
   const { title } = req.body;
+
   if (!title) {
     res.status(400).json({ error: "title обязателен" });
     return;
   }
+
   if (typeof title !== "string") {
     res.status(400).json({ error: "title должен быть строкой" });
     return;
   }
+
   if (title.trim() === "") {
     res.status(400).json({ error: "title не может быть пустым" });
     return;
   }
+
   const newCard: Card = {
     id: String(Date.now()),
     title: title.trim(),
     isDone: false,
     isUrgent: false,
   };
+
   cards.push(newCard);
   res.status(201).json(newCard);
+});
+
+app.delete("/cards/:id", (req, res) => {
+  const { id } = req.params;
+  const index = cards.findIndex((card) => card.id === id);
+
+  if (index === -1) {
+    res.status(404).json({ error: "Карточка не найдена" });
+    return;
+  }
+
+  cards.splice(index, 1);
+  res.status(204).end();
+});
+
+app.use((req, res) => {
+  res.status(404).json({ error: `Такого пути нет: ${req.method} ${req.url}` });
+});
+
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err);
+  res.status(500).json({ error: "Что-то сломалось на сервере" });
 });
 
 app.listen(3001, () => {
