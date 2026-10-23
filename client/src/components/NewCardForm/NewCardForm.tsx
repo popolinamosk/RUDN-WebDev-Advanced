@@ -13,7 +13,17 @@ export function NewCardForm() {
       queryClient.invalidateQueries({ queryKey: ["cards"] });
       setTitle("");
     },
+    onError: (error) => {
+      console.error("Ошибка при создании карточки:", error);
+    },
   });
+
+  const handleSubmit = () => {
+    if (!title.trim()) {
+      return;
+    }
+    mutation.mutate(title);
+  };
 
   return (
     <div className={styles.form}>
@@ -22,15 +32,19 @@ export function NewCardForm() {
         placeholder="Название карточки"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleSubmit();
+          }
+        }}
       />
       <button
         className={styles.button}
         type="button"
-        onClick={() => mutation.mutate(title)}
+        onClick={handleSubmit}
       >
         Добавить
       </button>
     </div>
   );
 }
-
