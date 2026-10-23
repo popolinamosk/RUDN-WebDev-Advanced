@@ -1,12 +1,5 @@
 import express from "express";
-import type { Card } from «./types/card.ts»;
-
-type Card = {
-  id: string;
-  title: string;
-  isDone: boolean;
-  isUrgent?: boolean;
-};
+import type { Card } from "./types/card.ts";
 
 const cards: Card[] = [
   { id: "1", title: "Спроектировать структуру доски", isDone: true, isUrgent: false },
