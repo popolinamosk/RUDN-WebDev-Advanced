@@ -1,4 +1,5 @@
 import express from "express";
+import type { Card } from «./types/card.ts»;
 
 type Card = {
   id: string;
