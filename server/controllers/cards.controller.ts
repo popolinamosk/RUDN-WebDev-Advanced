@@ -21,3 +21,14 @@ export async function deleteCard(req: Request, res: Response) {
 
   res.status(204).end();
 }
+
+export async function patchCardDone(req: Request, res: Response) {
+  const card = await cardsService.updateCardDone(req.params.id, req.body.isDone);
+
+  if (!card) {
+    res.status(404).json({ error: "Карточка не найдена" });
+    return;
+  }
+
+  res.json(card);
+}
