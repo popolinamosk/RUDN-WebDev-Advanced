@@ -21,8 +21,8 @@
 
 ## 4. Сервер — роут
 
-- [ ] 4.1 Добавить одну строку: `router.patch('/cards/:id', validateCardDone, patchCardDone)`.
-- [ ] 4.2 Убедиться, что middleware подключён до контроллера.
+- [x] 4.1 Добавить одну строку: `router.patch('/cards/:id', validateCardDone, patchCardDone)`.
+- [x] 4.2 Убедиться, что middleware подключён до контроллера.
 
 ## 5. Клиент — элемент управления на карточке
 
