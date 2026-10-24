@@ -1,0 +1,5 @@
+schema: spec-driven
+name: mark-card-done
+description: Возможность отмечать карточки как выполненные (isDone) через PATCH /cards/:id
+createdAt: 2026-10-24T15:38:00+03:00
+updatedAt: 2026-10-24T15:38:00+03:00
