@@ -7,24 +7,7 @@ export async function getCards(req: Request, res: Response) {
 }
 
 export async function createCard(req: Request, res: Response) {
-  const { title } = req.body;
-
-  if (!title) {
-    res.status(400).json({ error: "title обязателен" });
-    return;
-  }
-
-  if (typeof title !== "string") {
-    res.status(400).json({ error: "title должен быть строкой" });
-    return;
-  }
-
-  if (title.trim() === "") {
-    res.status(400).json({ error: "title не может быть пустым" });
-    return;
-  }
-
-  const card = await cardsService.create(title.trim());
+  const card = await cardsService.create(req.body.title.trim());
   res.status(201).json(card);
 }
 
