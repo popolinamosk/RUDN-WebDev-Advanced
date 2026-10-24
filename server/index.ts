@@ -1,21 +1,16 @@
 import express from "express";
-import type { Card } from "./types/card.ts";
-
-const cards: Card[] = [
-  { id: "1", title: "Спроектировать структуру доски", isDone: true, isUrgent: false },
-  { id: "2", title: "Подключить доску к серверу", isDone: false, isUrgent: true },
-  { id: "3", title: "Добавить фильтр выполненных карточек", isDone: false, isUrgent: false },
-];
+import * as cardsService from "./services/cards.service.ts";
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/cards", (req, res) => {
+app.get("/cards", async (req, res) => {
+  const cards = await cardsService.getAll();
   res.json(cards);
 });
 
-app.post("/cards", (req, res) => {
+app.post("/cards", async (req, res) => {
   const { title } = req.body;
 
   if (!title) {
@@ -33,33 +28,23 @@ app.post("/cards", (req, res) => {
     return;
   }
 
-  const newCard: Card = {
-    id: String(Date.now()),
-    title: title.trim(),
-    isDone: false,
-    isUrgent: false,
-  };
-
-  cards.push(newCard);
-  res.status(201).json(newCard);
+  const card = await cardsService.create(title.trim());
+  res.status(201).json(card);
 });
 
-app.delete("/cards/:id", (req, res) => {
-  const { id } = req.params;
-  const index = cards.findIndex((card) => card.id === id);
+app.delete("/cards/:id", async (req, res) => {
+  const isDeleted = await cardsService.remove(req.params.id);
 
-  if (index === -1) {
+  if (!isDeleted) {
     res.status(404).json({ error: "Карточка не найдена" });
     return;
   }
 
-  cards.splice(index, 1);
   res.status(204).end();
 });
 
 app.use((req, res) => {
-  res.status(404).json({ error: `Такого пути нет: ${req.method} ${req.url}` });
-});
+res.status(404).json({ error: "Такого пути нет: " + req.method + " " + req.url });});
 
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error(err);
