@@ -2,9 +2,9 @@
 
 ## 1. Сервер — middleware валидации isDone
 
-- [ ] 1.1 Создать middleware `validateCardDone`, проверяющий что `req.body.isDone` имеет тип `boolean`.
-- [ ] 1.2 Middleware возвращает 400 с понятным сообщением при нарушении.
-- [ ] 1.3 Протестировать: `true`, `false`, `undefined`, `"true"`, `0`, `1` — первые два проходят, остальные — 400.
+- [x] 1.1 Создать middleware `validateCardDone`, проверяющий что `req.body.isDone` имеет тип `boolean`.
+- [x] 1.2 Middleware возвращает 400 с понятным сообщением при нарушении.
+- [x] 1.3 Протестировать: `true`, `false`, `undefined`, `"true"`, `0`, `1` — первые два проходят, остальные — 400.
 
 ## 2. Сервер — сервис-функция updateCardDone
 
