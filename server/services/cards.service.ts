@@ -31,3 +31,14 @@ export async function remove(id: string): Promise<boolean> {
   cards.splice(index, 1);
   return true;
 }
+
+export async function updateCardDone(cardId: string, isDone: boolean): Promise<Card | null> {
+  const card = cards.find((card) => card.id === cardId);
+
+  if (!card) {
+    return null;
+  }
+
+  card.isDone = isDone;
+  return card;
+}
