@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteCard } from "../../api/cards";
+import { deleteCard, updateCardDone } from "../../api/cards";
 import { BoardCard } from "../BoardCard/BoardCard";
 import type { Card } from "../../types/card";
 import styles from "./BoardColumn.module.css";
@@ -18,6 +18,13 @@ export function BoardColumn({ cards }: BoardColumnProps) {
     },
   });
 
+  const toggleMutation = useMutation({
+    mutationFn: ({ id, isDone }: { id: string; isDone: boolean }) => updateCardDone(id, isDone),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["cards"] });
+    },
+  });
+
   return (
     <section className={styles.column}>
       <h2 className={styles.title}>К выполнению</h2>
@@ -28,6 +35,7 @@ export function BoardColumn({ cards }: BoardColumnProps) {
             title={card.title}
             isDone={card.isDone}
             onDelete={() => deleteMutation.mutate(card.id)}
+            onToggle={() => toggleMutation.mutate({ id: card.id, isDone: !card.isDone })}
           />
         ))}
       </div>
