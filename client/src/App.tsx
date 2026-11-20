@@ -3,12 +3,15 @@ import { BoardHeader } from "./components/BoardHeader/BoardHeader";
 import { BoardColumn } from "./components/BoardColumn/BoardColumn";
 import { NewCardForm } from "./components/NewCardForm/NewCardForm";
 import { fetchCards } from "./api/cards";
+import { useBoardFiltersStore } from "./store/useBoardFiltersStore";
 import styles from "./App.module.css";
 
 function App() {
+  const hideDone = useBoardFiltersStore((s) => s.hideDone);
+
   const { data: cards, isLoading } = useQuery({
-    queryKey: ["cards"],
-    queryFn: fetchCards,
+    queryKey: ["cards", hideDone],
+    queryFn: () => fetchCards(hideDone),
   });
 
   return (
