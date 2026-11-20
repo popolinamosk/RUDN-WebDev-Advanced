@@ -1,44 +1,22 @@
 import type { Card } from "../types/card.ts";
+import * as cardsRepository from "../repositories/cards.repository.ts";
 
-const cards: Card[] = [
-  { id: "1", title: "Спроектировать структуру доски", isDone: true, isUrgent: false },
-  { id: "2", title: "Подключить доску к серверу", isDone: false, isUrgent: true },
-  { id: "3", title: "Добавить фильтр выполненных карточек", isDone: false, isUrgent: false },
-];
+// Временно, до темы 6: пока входа нет, все карточки создаёт один и тот же пользователь.
+// Это id пользователя из seed.sql — после npm run db:reset он всегда равен 1.
+const CURRENT_USER_ID = 1;
 
 export async function getAll(): Promise<Card[]> {
-  return cards;
+  return cardsRepository.findAll();
 }
 
 export async function create(title: string): Promise<Card> {
-  const newCard: Card = {
-    id: String(Date.now()),
-    title,
-    isDone: false,
-    isUrgent: false,
-  };
-  cards.push(newCard);
-  return newCard;
+  return cardsRepository.insert(title, CURRENT_USER_ID);
 }
 
-export async function remove(id: string): Promise<boolean> {
-  const index = cards.findIndex((card) => card.id === id);
-
-  if (index === -1) {
-    return false;
-  }
-
-  cards.splice(index, 1);
-  return true;
+export async function remove(id: number): Promise<boolean> {
+  return cardsRepository.deleteById(id);
 }
 
-export async function updateCardDone(cardId: string, isDone: boolean): Promise<Card | null> {
-  const card = cards.find((card) => card.id === cardId);
-
-  if (!card) {
-    return null;
-  }
-
-  card.isDone = isDone;
-  return card;
+export async function updateCardDone(id: number, isDone: boolean): Promise<Card | null> {
+  return cardsRepository.setDone(id, isDone);
 }
