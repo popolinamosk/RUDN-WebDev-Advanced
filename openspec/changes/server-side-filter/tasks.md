@@ -21,13 +21,13 @@
 
 ## 4. Клиент — fetchCards(hideDone)
 
-- [ ] 4.1 В `client/src/api/cards.ts` изменить `fetchCards` на `fetchCards(hideDone?: boolean)`.
-- [ ] 4.2 При `hideDone === true` добавить параметр `done=false` к URL (`/api/cards?done=false`).
-- [ ] 4.3 При `hideDone === false` или `undefined` запрос к `/api/cards` без параметров.
-- [ ] 4.4 В `client/src/App.tsx` создать стор `useBoardFiltersStore` с состоянием `hideDone` и функцией `toggleHideDone`.
-- [ ] 4.5 Включить `hideDone` в ключ `useQuery`: `queryKey: ["cards", hideDone]`.
-- [ ] 4.6 Передать `hideDone` в `queryFn: () => fetchCards(hideDone)`.
-- [ ] 4.7 Убедиться, что при пустом ответе сервера (`[]`) доска показывает пустую колонку, а не сообщение об ошибке загрузки (React Query возвращает пустой массив, `BoardColumn` рендерит пустой `div.cards`).
+- [x] 4.1 В `client/src/api/cards.ts` изменить `fetchCards` на `fetchCards(hideDone?: boolean)`.
+- [x] 4.2 При `hideDone === true` добавить параметр `done=false` к URL (`/api/cards?done=false`).
+- [x] 4.3 При `hideDone === false` или `undefined` запрос к `/api/cards` без параметров.
+- [x] 4.4 В `client/src/App.tsx` создать стор `useBoardFiltersStore` с состоянием `hideDone` и функцией `toggleHideDone`.
+- [x] 4.5 Включить `hideDone` в ключ `useQuery`: `queryKey: ["cards", hideDone]`.
+- [x] 4.6 Передать `hideDone` в `queryFn: () => fetchCards(hideDone)`.
+- [x] 4.7 Убедиться, что при пустом ответе сервера (`[]`) доска показывает пустую колонку, а не сообщение об ошибке загрузки (React Query возвращает пустой массив, `BoardColumn` рендерит пустой `div.cards`).
 
 ## 5. Проверка критериев приёмки
 

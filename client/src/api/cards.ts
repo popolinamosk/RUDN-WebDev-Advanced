@@ -1,7 +1,12 @@
 import type { Card } from "../types/card";
 
-export async function fetchCards(): Promise<Card[]> {
-  const response = await fetch("/api/cards");
+export async function fetchCards(hideDone?: boolean): Promise<Card[]> {
+  const params = new URLSearchParams();
+  if (hideDone === true) {
+    params.set("done", "false");
+  }
+  const url = `/api/cards${params.toString() ? "?" + params.toString() : ""}`;
+  const response = await fetch(url);
   if (!response.ok) throw new Error("Не удалось загрузить карточки");
   return response.json();
 }
