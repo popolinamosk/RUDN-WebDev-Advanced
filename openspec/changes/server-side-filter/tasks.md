@@ -2,10 +2,10 @@
 
 ## 1. Репозиторий — findAll(isDone?)
 
-- [ ] 1.1 В `server/repositories/cards.repository.ts` изменить сигнатуру `findAll` на `findAll(isDone?: boolean)`.
-- [ ] 1.2 При `isDone !== undefined` добавить `WHERE is_done = $1` и передать `[isDone]` как второй аргумент `pool.query`.
-- [ ] 1.3 При `isDone === undefined` выполнить исходный запрос без `WHERE`.
-- [ ] 1.4 Убедиться, что `isDone` попадает в SQL только через `$1` — проверить поиск `${` по проекту не даёт новых вставок.
+- [x] 1.1 В `server/repositories/cards.repository.ts` изменить сигнатуру `findAll` на `findAll(isDone?: boolean)`.
+- [x] 1.2 При `isDone !== undefined` добавить `WHERE is_done = $1` и передать `[isDone]` как второй аргумент `pool.query`.
+- [x] 1.3 При `isDone === undefined` выполнить исходный запрос без `WHERE`.
+- [x] 1.4 Убедиться, что `isDone` попадает в SQL только через `$1` — проверить поиск `${` по проекту не даёт новых вставок.
 
 ## 2. Сервис — getAll(isDone?)
 

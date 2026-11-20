@@ -17,10 +17,19 @@ function toCard(row: CardRow): Card {
   };
 }
 
-export async function findAll(): Promise<Card[]> {
-  const result = await pool.query(
-    "SELECT id, title, is_done, is_urgent FROM cards ORDER BY created_at DESC",
-  );
+export async function findAll(isDone?: boolean): Promise<Card[]> {
+  let result: { rows: CardRow[] };
+
+  if (isDone !== undefined) {
+    result = await pool.query(
+      "SELECT id, title, is_done, is_urgent FROM cards WHERE is_done = $1 ORDER BY created_at DESC",
+      [isDone],
+    );
+  } else {
+    result = await pool.query(
+      "SELECT id, title, is_done, is_urgent FROM cards ORDER BY created_at DESC",
+    );
+  }
 
   return result.rows.map(toCard);
 }
