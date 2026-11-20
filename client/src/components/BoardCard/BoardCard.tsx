@@ -4,12 +4,21 @@ type BoardCardProps = {
   title: string;
   isDone: boolean;
   onDelete?: () => void;
+  onToggle?: () => void;
 };
 
-export function BoardCard({ title, isDone, onDelete }: BoardCardProps) {
+export function BoardCard({ title, isDone, onDelete, onToggle }: BoardCardProps) {
   return (
     <div className={`${styles.card} ${isDone ? styles.done : ""}`}>
-      {title}
+      <label className={styles.checkboxLabel}>
+        <input
+          type="checkbox"
+          checked={isDone}
+          onChange={onToggle}
+          className={styles.checkbox}
+        />
+        {title}
+      </label>
       {onDelete && (
         <button
           className={styles.deleteButton}
