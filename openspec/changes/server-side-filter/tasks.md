@@ -9,15 +9,15 @@
 
 ## 2. Сервис — getAll(isDone?)
 
-- [ ] 2.1 В `server/services/cards.service.ts` изменить сигнатуру `getAll` на `getAll(isDone?: boolean)`.
-- [ ] 2.2 Передать `isDone` в `cardsRepository.findAll(isDone)`.
+- [x] 2.1 В `server/services/cards.service.ts` изменить сигнатуру `getAll` на `getAll(isDone?: boolean)`.
+- [x] 2.2 Передать `isDone` в `cardsRepository.findAll(isDone)`.
 
 ## 3. Контроллер — разбор параметра done
 
-- [ ] 3.1 В `server/controllers/cards.controller.ts` прочитать `req.query.done`.
-- [ ] 3.2 Валидировать: `undefined` → `isDone = undefined`, `"true"` → `isDone = true`, `"false"` → `isDone = false`.
-- [ ] 3.3 Любое другое значение → `res.status(400).json({ error: "..." })` и `return`.
-- [ ] 3.4 Вызвать `cardsService.getAll(isDone)` и ответить 200 с результатом.
+- [x] 3.1 В `server/controllers/cards.controller.ts` прочитать `req.query.done`.
+- [x] 3.2 Валидировать: `undefined` → `isDone = undefined`, `"true"` → `isDone = true`, `"false"` → `isDone = false`.
+- [x] 3.3 Любое другое значение → `res.status(400).json({ error: "..." })` и `return`.
+- [x] 3.4 Вызвать `cardsService.getAll(isDone)` и ответить 200 с результатом.
 
 ## 4. Клиент — fetchCards(hideDone)
 

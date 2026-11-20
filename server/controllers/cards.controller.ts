@@ -12,7 +12,22 @@ function parseId(value: string): number | null {
 }
 
 export async function getCards(req: Request, res: Response) {
-  const cards = await cardsService.getAll();
+  const rawDone = req.query.done;
+
+  let isDone: boolean | undefined;
+
+  if (rawDone === undefined) {
+    isDone = undefined;
+  } else if (rawDone === "true") {
+    isDone = true;
+  } else if (rawDone === "false") {
+    isDone = false;
+  } else {
+    res.status(400).json({ error: 'Параметр "done" должен быть "true" или "false"' });
+    return;
+  }
+
+  const cards = await cardsService.getAll(isDone);
   res.json(cards);
 }
 

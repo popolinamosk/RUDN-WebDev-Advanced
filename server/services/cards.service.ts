@@ -5,8 +5,8 @@ import * as cardsRepository from "../repositories/cards.repository.ts";
 // Это id пользователя из seed.sql — после npm run db:reset он всегда равен 1.
 const CURRENT_USER_ID = 1;
 
-export async function getAll(): Promise<Card[]> {
-  return cardsRepository.findAll();
+export async function getAll(isDone?: boolean): Promise<Card[]> {
+  return cardsRepository.findAll(isDone);
 }
 
 export async function create(title: string): Promise<Card> {
